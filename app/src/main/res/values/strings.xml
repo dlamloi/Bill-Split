@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Bill Split</string>
+    <string name="welcome">Welcome to Bill Splitter</string>
+    <string name="split_friends">Split a bill between friends</string>
+    <string name="split_instructions">Have a bill you\'d like to split? Enter in a couple of fields and you can find out the evenly split cost amongst your group</string>
+    <string name="number_of_people">Please enter the <b>number</b> of people on your table:</string>
+    <string name="bill_amount">Please enter the total bill amount ($):</string>
+    <string name="everyone_owes">Everyone owes: </string>
+</resources>
