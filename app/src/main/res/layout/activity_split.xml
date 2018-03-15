@@ -103,21 +103,15 @@
             android:layout_gravity="center"
             style="@style/CardViewStyle">
 
-            <TextView
-                android:id="@+id/owing_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:textSize="25dp"
-                android:layout_gravity="center|top"
-                android:textColor="#85bb65"
-                android:text="@string/everyone_owes"/>
-
-
-
-
-
-
+                <TextView
+                    android:id="@+id/owing_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textSize="25dp"
+                    android:layout_gravity="center|top"
+                    android:textColor="#85bb65"
+                    android:layout_marginBottom="5dp"/>
 
         </android.support.v7.widget.CardView>
 

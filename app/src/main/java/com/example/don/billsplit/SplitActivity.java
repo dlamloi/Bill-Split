@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.text.DecimalFormat;
 
 public class SplitActivity extends AppCompatActivity {
@@ -28,6 +30,8 @@ public class SplitActivity extends AppCompatActivity {
         numberOfPeopleEt = findViewById(R.id.number_of_people_edittext);
         totalEt = findViewById(R.id.total_edittext);
         owingTv = findViewById(R.id.owing_textview);
+        int numberOfPeople = 0;
+        double total = 0;
 
         numberOfPeopleEt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -43,7 +47,7 @@ public class SplitActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                if (areRequiredEmpty()) setOwingEt(EVERYONE_OWES + "0");
             }
         });
 
@@ -61,26 +65,33 @@ public class SplitActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                if (areRequiredEmpty()) setOwingEt(EVERYONE_OWES + "0");
             }
         });
 
     }
 
     private double getOwing() throws NumberFormatException {
-        int numberOfPeople = Integer.parseInt(numberOfPeopleEt.getText() + "");
-        double total = Double.parseDouble(totalEt.getText() + "");
+        int numberOfPeople = areNumberOfPeopleEmpty() ? 0 : Integer.parseInt(numberOfPeopleEt.getText() + "");
+        double total = areTotalEmpty() ? 0 : Double.parseDouble(totalEt.getText() + "");
         return total / numberOfPeople;
     }
 
+    private boolean areNumberOfPeopleEmpty() {
+        return TextUtils.isEmpty(numberOfPeopleEt.getText().toString());
+    }
+
+    private boolean areTotalEmpty() {
+        return TextUtils.isEmpty(totalEt.getText().toString());
+    }
+
     private boolean areRequiredEmpty() {
-        return (TextUtils.isEmpty(totalEt.getText().toString()) ||
-                TextUtils.isEmpty(numberOfPeopleEt.getText().toString()));
+        return (areNumberOfPeopleEmpty() || areTotalEmpty());
     }
 
     private void setOwingEt() {
         if (!areRequiredEmpty()) {
-            owingTv.setText(EVERYONE_OWES + formatted(getOwing()));
+            setOwingEt(EVERYONE_OWES + formatted(getOwing()));
         }
 
 
@@ -88,6 +99,10 @@ public class SplitActivity extends AppCompatActivity {
 
     private String formatted(double value) {
         return new DecimalFormat("###,##0.00").format(value);
+    }
+
+    private void setOwingEt(String s) {
+        owingTv.setText(s);
     }
 
 
