@@ -11,12 +11,14 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+
 public class SplitActivity extends AppCompatActivity {
 
     private EditText numberOfPeopleEt;
     private EditText totalEt;
     private TextView owingTv;
-    public static final String EVERYONE_OWES = "Everyone Owes: ";
+    public static final String EVERYONE_OWES = "Everyone Owes: $";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +37,8 @@ public class SplitActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!areRequiredEmpty()) {
-                    setOwingEt();
-                }
+                setOwingEt();
+
             }
 
             @Override
@@ -54,9 +55,8 @@ public class SplitActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!areRequiredEmpty()) {
-                    setOwingEt();
-                }
+                setOwingEt();
+
             }
 
             @Override
@@ -79,7 +79,15 @@ public class SplitActivity extends AppCompatActivity {
     }
 
     private void setOwingEt() {
-        owingTv.setText(EVERYONE_OWES + getOwing());
+        if (!areRequiredEmpty()) {
+            owingTv.setText(EVERYONE_OWES + formatted(getOwing()));
+        }
+
+
+    }
+
+    private String formatted(double value) {
+        return new DecimalFormat("###,##0.00").format(value);
     }
 
 
